@@ -2,8 +2,8 @@ package org.ibitu.service;
 
 import java.util.List;
 
-import org.ibitu.domain.Criteria;
 import org.ibitu.domain.DBoardVO;
+import org.ibitu.domain.SearchCriteria;
 import org.ibitu.persistence.DBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,13 +38,13 @@ public class DBoardServiceImpl implements DBoardService {
 	}
 
 	@Override
-	public List<DBoardVO> listCriteria(Criteria cri) throws Exception {
-		return mapper.listCriteria(cri);
+	public List<DBoardVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		return mapper.listSearch(cri);
 	}
 	
 	@Override
-	public int listCntCriteria(Criteria cri) throws Exception {
-		return mapper.cntPaging(cri);
+	public int listSearchCnt(SearchCriteria cri) throws Exception {
+		return mapper.listSearchCnt(cri);
 	}
 
 }

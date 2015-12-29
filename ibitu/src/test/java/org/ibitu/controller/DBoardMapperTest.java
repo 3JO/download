@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.ibitu.domain.Criteria;
 import org.ibitu.domain.DBoardVO;
+import org.ibitu.domain.SearchCriteria;
 import org.ibitu.persistence.DBoardMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -68,17 +69,37 @@ public class DBoardMapperTest {
 	}
 
 	@Test
-	public void listCriteriaTest() throws Exception {
-		Criteria cri = new Criteria();
-		cri.setPage(2);
-		cri.setPerPageNum(20);
-
-		List<DBoardVO> list = mapper.listCriteria(cri);
-
+	public void DynamicTest() throws Exception {
+		SearchCriteria cri = new SearchCriteria();
+		cri.setPage(1);
+		cri.setKeyword("페");
+		cri.setSearchType("t");
+		
+		logger.info("=====================");
+		
+		List<DBoardVO> list = mapper.listSearch(cri);
+		
 		for (DBoardVO vo : list) {
 			logger.info(vo.getBno() + ":" + vo.getTitle());
 		}
+		
+		logger.info("=====================");
+		logger.info("COUNT: " + mapper.listSearchCnt(cri));
 	}
+
+	
+//	@Test
+//	public void listCriteriaTest() throws Exception {
+//		Criteria cri = new Criteria();
+//		cri.setPage(2);
+//		cri.setPerPageNum(20);
+//
+//		List<DBoardVO> list = mapper.listCriteria(cri);
+//
+//		for (DBoardVO vo : list) {
+//			logger.info(vo.getBno() + ":" + vo.getTitle());
+//		}
+//	}
 
 	@Test
 	public void testURI() throws Exception {

@@ -34,7 +34,7 @@
 							<div class="form-group">
 								<label for="exampleInputPassword1">Content</label>
 								<textarea class="form-control" name="content" rows="3"
-									placeholder="Enter ..."></textarea>
+									placeholder="Enter Content"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Writer</label> <input

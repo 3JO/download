@@ -38,12 +38,22 @@ public class PageMaker {
 		next = endPage * cri.getPerPageNum() >= totalCnt ? false : true;
 
 	}
-	
+
 	public String makeQuery(int page) {
-		
+
 		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum()).build();
-		
+
+		return uriComponents.toUriString();
+	}
+
+	public String makeSearch(int page) {
+
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+				.queryParam("keyword", ((SearchCriteria)cri).getKeyword()).build();
+
 		return uriComponents.toUriString();
 	}
 
@@ -100,6 +110,5 @@ public class PageMaker {
 		return "PageMaker [totalCnt=" + totalCnt + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
 	}
-	
-	
+
 }

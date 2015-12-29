@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ibitu.domain.Criteria;
 import org.ibitu.domain.DBoardVO;
+import org.ibitu.domain.SearchCriteria;
 
 
 public interface DBoardMapper {
@@ -16,10 +17,15 @@ public interface DBoardMapper {
 
 	public void delete(Integer bno) throws Exception;
 
-//	public List<DBoardVO> listPage(int page) throws Exception;
+	public List<DBoardVO> listSearch(SearchCriteria cri) throws Exception;
+
+	public int listSearchCnt(SearchCriteria cri) throws Exception;
 	
-	public List<DBoardVO> listCriteria(Criteria cri) throws Exception;
+//	public List<DBoardVO> listCriteria(Criteria cri) throws Exception;
+//	public int cntPaging(Criteria cri) throws Exception;
+
 	
-	public int cntPaging(Criteria cri) throws Exception;
+	
+	
 
 }

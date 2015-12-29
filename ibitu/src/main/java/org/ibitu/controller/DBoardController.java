@@ -3,6 +3,7 @@ package org.ibitu.controller;
 import org.ibitu.domain.Criteria;
 import org.ibitu.domain.DBoardVO;
 import org.ibitu.domain.PageMaker;
+import org.ibitu.domain.SearchCriteria;
 import org.ibitu.service.DBoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ public class DBoardController {
 	@RequestMapping(value = "/registPage", method = RequestMethod.GET)
 	public void registGET(DBoardVO vo, Model model) throws Exception {
 		logger.info("regist get....");
+
 	}
 
 	@RequestMapping(value = "/registPage", method = RequestMethod.POST)
@@ -37,53 +39,62 @@ public class DBoardController {
 		service.regist(vo);
 
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/dboard/listPage";
+		return "redirect:/dboard/list";
 	}
 
-	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info("Show all list with Criteria.....");
 		logger.info(cri.toString());
-		model.addAttribute("list", service.listCriteria(cri));
+		model.addAttribute("list", service.listSearchCriteria(cri));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		
-		pageMaker.setTotalCnt(service.listCntCriteria(cri));
-		
+
+		pageMaker.setTotalCnt(service.listSearchCnt(cri));
+
 		model.addAttribute("pageMaker", pageMaker);
 	}
 
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
-	public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+	public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
+			throws Exception {
 		model.addAttribute("dboardVO", service.read(bno));
 
 	}
 
 	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
-	public String remove(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) throws Exception {
+	public String remove(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		service.remove(bno);
-		rttr.addFlashAttribute("page", cri.getPage());
-		rttr.addFlashAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+
 		rttr.addFlashAttribute("msg", "SUCCESS");
-		return "redirect:/dboard/listPage";
+		return "redirect:/dboard/list";
 
 	}
-	
-	@RequestMapping(value="/modifyPage", method = RequestMethod.GET)
-	public void modifyGET(@RequestParam("bno") int bno,@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
+	public void modifyGET(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
+			throws Exception {
 		model.addAttribute("dboardVO", service.read(bno));
 	}
-	
-	@RequestMapping(value="/modifyPage", method = RequestMethod.POST)
-	public String modifyPOST(DBoardVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
+
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
+	public String modifyPOST(DBoardVO vo, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		logger.info("mod post......");
 		service.modify(vo);
-		rttr.addFlashAttribute("page", cri.getPage());
-		rttr.addFlashAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+
 		rttr.addFlashAttribute("msg", "SUCCESS");
-		
-		return "redirect:/dboard/listPage";
+
+		logger.info(rttr.toString());
+
+		return "redirect:/dboard/list";
 	}
-	
 
 }

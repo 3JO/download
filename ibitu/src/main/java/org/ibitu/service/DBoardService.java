@@ -2,8 +2,8 @@ package org.ibitu.service;
 
 import java.util.List;
 
-import org.ibitu.domain.Criteria;
 import org.ibitu.domain.DBoardVO;
+import org.ibitu.domain.SearchCriteria;
 
 public interface DBoardService {
 	
@@ -15,7 +15,7 @@ public interface DBoardService {
 	
 	public void remove(Integer bno) throws Exception;
 	
-	public List<DBoardVO> listCriteria(Criteria cri) throws Exception;
+	public List<DBoardVO> listSearchCriteria(SearchCriteria cri) throws Exception;
 	
-	public int listCntCriteria(Criteria cri) throws Exception;
+	public int listSearchCnt(SearchCriteria cri) throws Exception;
 }

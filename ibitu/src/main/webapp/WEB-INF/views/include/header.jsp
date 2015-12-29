@@ -248,7 +248,7 @@
 					</a></li>
 
 					<li class="header">REFERENCE</li>
-					<li class="treeview"><a href="http://192.168.0.65:8080/dboard/listCri"> <i
+					<li class="treeview"><a href="http://192.168.0.65:8080/dboard/list"> <i
 							class="fa fa-download"></i> <span>Downloads</span>
 					</a></li>
 				</ul>
