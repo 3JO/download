@@ -57,5 +57,10 @@ public class DReplyMapperImpl implements DReplyMapper {
 	public void delete(Integer rno) throws Exception {
 		session.delete(namespace + ".delete", rno);
 	}
+	
+	@Override
+	public int getBno(Integer rno) throws Exception {
+		return session.selectOne(namespace + ".getBno", rno);
+	}
 
 }

@@ -1,9 +1,10 @@
 package org.ibitu.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.ibitu.domain.Criteria;
 import org.ibitu.domain.DBoardVO;
 import org.ibitu.domain.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,16 +51,22 @@ public class DBoardMapperImpl implements DBoardMapper {
 		return session.selectOne(namespace + ".listSearchCnt", cri);
 	}
 	
-	/*@Override
-	public List<DBoardVO> listCriteria(Criteria cri) throws Exception {
+	@Override
+	public void uptReplyCnt(Integer bno, int amount) throws Exception {
 		
-		return session.selectList(namespace+".listCriteria", cri);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("bno", bno);
+		paramMap.put("amount", amount);
+		
+		session.update(namespace + ".uptReplyCnt", paramMap);
 	}
 	
 	@Override
-	public int cntPaging(Criteria cri) throws Exception {
-		return session.selectOne(namespace + ".cntPaging", cri);
-	}*/
+	public void uptViewCnt(Integer bno) throws Exception {
+		
+		session.update(namespace + ".uptViewCnt", bno);
+	}
 
 
 }

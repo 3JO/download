@@ -7,6 +7,8 @@ import org.ibitu.domain.SearchCriteria;
 import org.ibitu.persistence.DBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DBoardServiceImpl implements DBoardService {
@@ -19,9 +21,11 @@ public class DBoardServiceImpl implements DBoardService {
 		mapper.create(vo);
 
 	}
-
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override
 	public DBoardVO read(Integer bno) throws Exception {
+		mapper.uptViewCnt(bno);
 		return mapper.read(bno);
 	}
 

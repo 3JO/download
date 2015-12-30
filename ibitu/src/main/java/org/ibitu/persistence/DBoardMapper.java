@@ -21,8 +21,9 @@ public interface DBoardMapper {
 
 	public int listSearchCnt(SearchCriteria cri) throws Exception;
 	
-//	public List<DBoardVO> listCriteria(Criteria cri) throws Exception;
-//	public int cntPaging(Criteria cri) throws Exception;
+	public void uptReplyCnt(Integer bno, int amount) throws Exception;
+	
+	public void uptViewCnt(Integer bno) throws Exception;
 
 	
 	
