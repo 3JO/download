@@ -38,7 +38,9 @@ public class UploadFileUtils {
 		} else {
 			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
 		}
-
+		logger.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		logger.info("uploadPath: " + uploadPath);
+		logger.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");	
 		return uploadedFileName;
 	}
 
